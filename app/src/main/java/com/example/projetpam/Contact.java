@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,6 @@ public class Contact extends AppCompatActivity {
 
         Button btnChooseContact = (Button) findViewById(R.id.btnChooseContact);
 
-        // btnChooseContact.setOnClickListener((View.OnClickListener) this);
     }
 
     public void onClick(View v) {
@@ -53,13 +53,8 @@ public class Contact extends AppCompatActivity {
 
                     String number = cursor.getString(numberIndex);
                     String name = cursor.getString(nameIndex);
-                    TextView tvName = (TextView) findViewById(R.id.tvName);
-                    TextView tvNumero = (TextView) findViewById(R.id.tvNumero);
-                    tvName.setText(name);
-                    tvNumero.setText(number);
-                    /*Toast successMessage = Toast.makeText(getApplicationContext(),getResources().getString(R.string.success_message) + name, Toast.LENGTH_LONG);
-                    successMessage.setGravity(Gravity.BOTTOM,0,0);
-                    successMessage.show();*/
+                    EditText edNumber = (EditText) findViewById(R.id.edNumero);
+                    edNumber.setText(number);
                 }
 
             }
@@ -67,11 +62,12 @@ public class Contact extends AppCompatActivity {
     }
 
     public void composeMmsMessage(View view) {
-        TextView tvName = (TextView) findViewById(R.id.tvName);
-        TextView tvNumero = (TextView) findViewById(R.id.tvNumero);
-        String name = "Nom : " + tvName.getText().toString();
-        String number = tvNumero.getText().toString();
-        Log.d("numeeee", number);
-        SmsManager.getDefault().sendTextMessage(number, null, "Acceptez vous ?", null, null);
+        EditText edNumero = (EditText) findViewById(R.id.edNumero);
+        String number = edNumero.getText().toString();
+
+        SmsManager.getDefault().sendTextMessage(number, null, "Acceptez vous le rdv ?", null, null);
+        Toast successMessage = Toast.makeText(getApplicationContext(),getResources().getString(R.string.success_message) + number, Toast.LENGTH_LONG);
+        successMessage.setGravity(Gravity.BOTTOM,0,0);
+        successMessage.show();
     }
 }

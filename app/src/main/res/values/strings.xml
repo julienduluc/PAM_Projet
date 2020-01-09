@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">ProjetPAM</string>
-    <string name="success_message">Bravo !</string>
+    <string name="success_message">Message envoyé au : </string>
 </resources>
